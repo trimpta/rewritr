@@ -3,12 +3,16 @@ import time
 import requests
 import json
 import os
+import pyautogui
 
-
+prev = None
 while True:
     time.sleep(0.1)
+    with pyautogui.hold('ctrl'):
+        pyautogui.press('c')
     t =pyperclip.paste() 
-    if t:
+    
+    if t and t!= prev:
         response = requests.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{t}')
         os.system('cls')
         print(t)
@@ -25,3 +29,4 @@ while True:
 
         pyperclip.copy('')
         
+    prev = t
