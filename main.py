@@ -5,16 +5,27 @@ import pyperclip
 import os
 import requests
 import json
+from os import system
+
+try:
+    import google.generativeai as genai
+    import key
+    
+    model = genai.configure(api_key=key.api_key)#type your api key
+    model = genai.GenerativeModel("gemini-1.5-flash")
+    gen_ai_installed = True
+
+except:
+    gen_ai_installed = False
+
 
 prev = None
 
 state_left = win32api.GetKeyState(0x01)  # Left button down = 0 or 1. Button up = -127 or -128
 state_right = win32api.GetKeyState(0x02)  # Right button down = 0 or 1. Button up = -127 or -128
 
+print(gen_ai_installed)
 
-
-
-from os import system
 
 
 while True:
@@ -31,8 +42,10 @@ while True:
                 t = pyperclip.paste()
                 
                 if t and t!= prev:
-                    response = requests.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{t}')
                     os.system('cls')
+                    print('dictionary ')
+                    print()
+                    response = requests.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{t}')
                     print(t)
                     if response.status_code == 200:
                         meanings = json.loads(response.text)[0]['meanings']
@@ -45,8 +58,19 @@ while True:
                                 print()
                             print()
 
-                    pyperclip.copy('')
                     
+                    
+                    elif gen_ai_installed:
+                        os.system('cls')
+                        print('ai')
+                        print()
+                        print(t)
+                        response = model.generate_content("explain this word or sentence to me "+t)
+                        print(response.text)
+
+                    pyperclip.copy('')
+
+
                 prev = t
     except:
         pass
