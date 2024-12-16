@@ -43,29 +43,15 @@ while True:
                 
                 if t and t!= prev:
                     os.system('cls')
-                    print('dictionary ')
+                    print('rewritr ')
                     print()
-                    response = requests.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{t}')
-                    print(t)
-                    if response.status_code == 200:
-                        meanings = json.loads(response.text)[0]['meanings']
-                        for i in meanings:
-                            print('part of speech:',i['partOfSpeech'])
-                            for j in i['definitions']:
-                                print('defintion:',j['definition'])
-                                if 'example' in j:
-                                    print('example:',j['example'])
-                                print()
-                            print()
-
                     
-                    
-                    elif gen_ai_installed:
+                    if gen_ai_installed:
                         os.system('cls')
                         print('ai')
                         print()
                         print(t)
-                        response = model.generate_content("explain this word or sentence to me "+t)
+                        response = model.generate_content("Rewrite the following to make it shorter ensuring all the content is still there: "+t)
                         print(response.text)
 
                     pyperclip.copy('')
