@@ -17,6 +17,22 @@ try:
 except:
     gen_ai_installed = False
 
+def print_with_newlines(text):
+    words = text.split()  # Split text into words
+    new_text = []
+    word_count = 0
+
+    for word in words:
+        new_text.append(word)
+        word_count += 1
+
+        # Check if it's the 10th word and there's no newline in the last words
+        if word_count % 10 == 0 and '\n' not in word:
+            new_text.append('\n')
+
+    # Join and print the resulting text
+    print(" ".join(new_text))
+
 
 prev = None
 
@@ -50,9 +66,9 @@ while True:
                         print('ai')
                         print()
                         print(t)
-                        print("+++++++++++")
                         response = model.generate_content(f"Rewrite the following to make it around {int(len(t.split())*0.7)} words long ensuring the main content and structure(line numbers if exists in given text) is still there: {t}")
-                        print(rf"{response.text}")
+                        print(f"+++++{len(t.split())}->{len(response.text.split())}++++++")
+                        print_with_newlines(response.text)
 
                     pyperclip.copy('')
 
