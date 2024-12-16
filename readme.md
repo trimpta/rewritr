@@ -1,30 +1,32 @@
-# Clipboard Text Rewriter  
+# Text Rewriter
 
-This script monitors the clipboard for copied text and rewrites it using AI to make it more concise while preserving its structure.  
+## Description
 
-## Installation  
+A Python script that automatically rewrites selected text using Google's Gemini AI. When you select text by holding down the mouse button, the script copies and condenses the text to approximately 70% of its original length.
 
-1. Install Python 3.9 or later.  
-2. Install required packages:  
+## Installation
 
-```bash  
-pip install pyautogui pyperclip pywin32 requests google-generativeai  
-```  
+1. Install required libraries:
+```bash
+pip install pywin32 pyautogui pyperclip google-generativeai
+```
 
-3. Add your Google Generative AI API key in a `key.py` file:  
+2. Create a `key.py` file with your Google AI API key:
+```python
+API_KEY = 'your_google_ai_api_key_here'
+```
 
-```python  
-API_KEY = 'your-api-key-here'  
-```  
+## Usage
 
-## Usage  
+1. Run the script:
+```bash
+python text_rewriter.py
+```
 
-Run the script:  
+2. Select text by holding down the mouse button
+3. The script will automatically:
+   - Copy the selected text
+   - Generate a condensed version using Gemini AI
+   - Print the rewritten text
 
-```bash  
-python rewrite_clipboard.py  
-```  
-
-When you copy text, the rewritten version will be displayed in the terminal.  
-
----  
+Note: Currently supports Windows only.
