@@ -67,7 +67,9 @@ while True:
                         print()
                         print(t)
                         response = model.generate_content(f"Rewrite the following to make it around {int(len(t.split())*0.7)} words long ensuring the main content and structure(line numbers if exists in given text) is still there: {t}")
-                        print(f"+++++{len(t.split())}->{len(response.text.split())}++++++")
+                        time_saved = int(len(response.text.split())/23.9676884839*60)
+
+                        print(f"+++++{len(t.split())}--{time_saved//60}:{time_saved%60}-->{len(response.text.split())}++++++")
                         print_with_newlines(response.text)
 
                     pyperclip.copy('')
